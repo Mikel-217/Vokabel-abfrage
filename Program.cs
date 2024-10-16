@@ -17,16 +17,20 @@ public class Pmain {
 
     public static async void start() {
 
-        Console.WriteLine("Vokabel abfrage: \n Bitte eingeben welche Option gewählt werden soll: \n1 --> Abfrage starten\n2 --> neue Vokabeln hinzufügen\n");
+        Console.WriteLine("Vokabel abfrage: \n Bitte eingeben welche Option gewählt werden soll: \n1 --> Abfrage starten\n2 --> neue Vokabeln hinzufügen\n3 --> Beenden");
 
         int inputvi = Convert.ToInt32(Console.ReadLine()!);
 
         switch (inputvi) {
             case 1:
+
                 break;
             case 2:
                 VAdd adding = new VAdd();
                 await adding.vadd();
+                break;
+            case 3:
+                Environment.Exit(0);
                 break;
             default:
                 break;
@@ -35,14 +39,14 @@ public class Pmain {
 
 }
 
-class VAdd : Data {
+public class VAdd : Data {
 
     Data d = new Data();
     
     public async Task vadd() {
 
         List<string> inputvoc = new List<string>();
-        Console.WriteLine("Bitte Vokabel eingeben und Enter drücken: \n ESC zum beenden drücken \n");
+        Console.WriteLine("Bitte Vokabel eingeben und Enter drücken: \nESC zum beenden drücken \n");
 
         while (true) {
             d.vocabluary = Console.ReadLine();
@@ -52,6 +56,7 @@ class VAdd : Data {
                 if(inputvoc.Count > 0) {
                     await Writedata(inputvoc);
                 }
+                Thread.Sleep(2000);
                 Pmain.start();
             }
             inputvoc.Add(d.vocabluary!);
@@ -70,6 +75,7 @@ class VAdd : Data {
                 Console.WriteLine($"Hinzugefügt: {voc}");
             }
         }
+        Console.WriteLine("Alle hinzugefügt");
         inputvoc.Clear();
     }
 
