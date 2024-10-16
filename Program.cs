@@ -4,12 +4,12 @@ using System.Threading;
 using System.Runtime.CompilerServices;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using Datamain;
 
 namespace Program;
 
-
 public class Pmain {
-
+    Datamain.Data d = new Datamain.Data();
     static void Main(string[] args) {
 
         start();
@@ -23,7 +23,7 @@ public class Pmain {
 
         switch (inputvi) {
             case 1:
-
+                //TODO
                 break;
             case 2:
                 VAdd adding = new VAdd();
@@ -42,12 +42,33 @@ public class Pmain {
 public class VAdd : Data {
 
     Data d = new Data();
+
+    public void mainadd() {
+
+        Console.Clear();
+        Console.WriteLine("1 --> Liste erweitern \n2 --> neue Liste erstellen\n");
+        int inputmen2 = Convert.ToInt32(Console.ReadLine()!);
+
+        switch(inputmen2) {
+            case 1:
+                //TODO
+                break;            
+            case 2:
+                //TODO
+                break;
+            default:
+                Console.WriteLine("Bitte Gültige eingabe machen");
+                break;
+        }
+        
+    }
     
+    //ADD Vocabulary Task
     public async Task vadd() {
 
         List<string> inputvoc = new List<string>();
         Console.WriteLine("Bitte Vokabel eingeben und Enter drücken: \nESC zum beenden drücken \n");
-
+        
         while (true) {
             d.vocabluary = Console.ReadLine();
             ConsoleKeyInfo keyinfo = Console.ReadKey(true);
@@ -64,9 +85,11 @@ public class VAdd : Data {
 
     }
 
+    //Data Writing to a Txt File
     public async Task Writedata(List<string> inputvoc) {
 
         string filepath = @"C:\tmp\tests\ressources\vokabeln1.txt";
+        // string filepath = @"C:\tmp\tests\ressources\{Data}"; --> Later for getting the right path
 
         using (StreamWriter stream = new StreamWriter(filepath, append: true)) {
 
@@ -79,11 +102,13 @@ public class VAdd : Data {
         inputvoc.Clear();
     }
 
+    //To Create a File 
+    // public async Task CreateFile() {
+
+        //<Todo>    
+
+    // }
+
 }
 
 
-
-public class Data { 
-    public string? vocabluary { get; set; }
-
-}
