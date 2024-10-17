@@ -15,7 +15,7 @@ public class Pmain {
         start();
     }
 
-    public static async void start() {
+    public static void start() {
 
         Console.WriteLine("Vokabel abfrage: \n Bitte eingeben welche Option gewählt werden soll: \n1 --> Abfrage starten\n2 --> neue Vokabeln hinzufügen\n3 --> Beenden");
 
@@ -26,13 +26,14 @@ public class Pmain {
                 //TODO
                 break;
             case 2:
-                VAdd adding = new VAdd();
-                await adding.vadd();
+                VAdd add = new VAdd();
+                add.mainadd();
                 break;
             case 3:
                 Environment.Exit(0);
                 break;
             default:
+                Console.WriteLine("Bitte Gültige eingabe machen");
                 break;
         }
     }
@@ -54,13 +55,22 @@ public class VAdd : Data {
                 //TODO
                 break;            
             case 2:
-                //TODO
+                getFileName();
                 break;
             default:
                 Console.WriteLine("Bitte Gültige eingabe machen");
                 break;
         }
         
+    }
+
+    public async void getFileName() {
+
+        Console.Clear();
+        Console.WriteLine("Bitte geben Sie ihren Dateinamen an: \n");
+        d.fileName = Console.ReadLine()!;
+        await CreateFile(d.fileName);
+
     }
     
     //ADD Vocabulary Task
@@ -88,10 +98,8 @@ public class VAdd : Data {
     //Data Writing to a Txt File
     public async Task Writedata(List<string> inputvoc) {
 
-        string filepath = @"C:\tmp\tests\ressources\vokabeln1.txt";
-        // string filepath = @"C:\tmp\tests\ressources\{Data}"; --> Later for getting the right path
-
-        using (StreamWriter stream = new StreamWriter(filepath, append: true)) {
+        // string filepath = @"C:\tmp\tests\ressources\vokabeln1.txt";
+        using (StreamWriter stream = new StreamWriter(filepath2!, append: true)) {
 
             foreach (string voc in inputvoc!) {
                 await stream.WriteLineAsync(voc);
@@ -103,11 +111,15 @@ public class VAdd : Data {
     }
 
     //To Create a File 
-    // public async Task CreateFile() {
-
+    public async Task<string> CreateFile(string fileName) {
         //<Todo>    
-
-    // }
+        filepath2 = @"C:\tmp\tests\ressources\" + fileName + ".txt";
+        File.Create(filepath2);
+        Console.WriteLine($"Datei wurde erfolgreich erstellt: {filepath2}");
+        await vadd();
+        return filepath2;
+        
+    }
 
 }
 
