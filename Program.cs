@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using Datamain;
+using System.Net;
 
 namespace Program;
 
@@ -65,7 +66,7 @@ public class VAdd : Data {
     }
 
     public async Task getFileName() {
-
+        
         Console.Clear();
         Console.WriteLine("Bitte geben Sie ihren Dateinamen an: \n");
         fileName = Console.ReadLine()!;
@@ -87,7 +88,7 @@ public class VAdd : Data {
                 if(inputvoc.Count > 0) {
                     await Writedata(inputvoc);
                 }
-                Thread.Sleep(2000);
+                Thread.Sleep(100);
                 Pmain.start();
             }
             inputvoc.Add(d.vocabluary!);
@@ -98,6 +99,7 @@ public class VAdd : Data {
     //Data Writing to a Txt File
     public async Task Writedata(List<string> inputvoc) {
 
+        Console.WriteLine(filepath2);
         using (StreamWriter stream = new StreamWriter(filepath2!, append: true)) {
 
             foreach (string voc in inputvoc!) {
@@ -111,13 +113,15 @@ public class VAdd : Data {
 
     //To Create a File 
     public async Task<string> CreateFile(string fileName) {
-        //<Todo>
-        string filepath = @"C:\tmp\tests\ressources\";
+
+        //creates folder
         if(!Directory.Exists(filepath)) {
             Directory.CreateDirectory(filepath);
         }
-        filepath2 = @"C:\tmp\tests\ressources\" + fileName + ".txt";
-        File.Create(filepath2);
+        filepath2 = filepath + fileName + ".txt";
+        using (FileStream fs = File.Create(filepath2)) {
+        //Just close the file after creating it
+        }
         Console.WriteLine($"Datei wurde erfolgreich erstellt: {filepath2}");
         await vadd();
         return filepath2;
