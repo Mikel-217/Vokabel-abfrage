@@ -8,24 +8,32 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Mikel\\.nuget\\packages\\": {}
+    "C:\\Users\\Kunze\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mikel\\Documents\\projekt\\Vokabel-abfrage\\tests.csproj",
+      "projectUniqueName": "C:\\tmp\\tests\\Vokabel-abfrage\\tests.csproj",
       "projectName": "tests",
-      "projectPath": "C:\\Users\\Mikel\\Documents\\projekt\\Vokabel-abfrage\\tests.csproj",
-      "packagesPath": "C:\\Users\\Mikel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mikel\\Documents\\projekt\\Vokabel-abfrage\\obj\\",
+      "projectPath": "C:\\tmp\\tests\\Vokabel-abfrage\\tests.csproj",
+      "packagesPath": "C:\\Users\\Kunze\\.nuget\\packages\\",
+      "outputPath": "C:\\tmp\\tests\\Vokabel-abfrage\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Mikel\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Kunze\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
