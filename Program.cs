@@ -44,7 +44,7 @@ public class VAdd : Data {
 
     Data d = new Data();
 
-    public void mainadd() {
+    public async void mainadd() {
 
         Console.Clear();
         Console.WriteLine("1 --> Liste erweitern \n2 --> neue Liste erstellen\n");
@@ -55,7 +55,7 @@ public class VAdd : Data {
                 //TODO
                 break;            
             case 2:
-                getFileName();
+                await getFileName();
                 break;
             default:
                 Console.WriteLine("Bitte Gültige eingabe machen");
@@ -64,12 +64,12 @@ public class VAdd : Data {
         
     }
 
-    public async void getFileName() {
+    public async Task getFileName() {
 
         Console.Clear();
         Console.WriteLine("Bitte geben Sie ihren Dateinamen an: \n");
-        d.fileName = Console.ReadLine()!;
-        await CreateFile(d.fileName);
+        fileName = Console.ReadLine()!;
+        await CreateFile(fileName);
 
     }
     
@@ -98,7 +98,6 @@ public class VAdd : Data {
     //Data Writing to a Txt File
     public async Task Writedata(List<string> inputvoc) {
 
-        // string filepath = @"C:\tmp\tests\ressources\vokabeln1.txt";
         using (StreamWriter stream = new StreamWriter(filepath2!, append: true)) {
 
             foreach (string voc in inputvoc!) {
@@ -112,13 +111,16 @@ public class VAdd : Data {
 
     //To Create a File 
     public async Task<string> CreateFile(string fileName) {
-        //<Todo>    
+        //<Todo>
+        string filepath = @"C:\tmp\tests\ressources\";
+        if(!Directory.Exists(filepath)) {
+            Directory.CreateDirectory(filepath);
+        }
         filepath2 = @"C:\tmp\tests\ressources\" + fileName + ".txt";
         File.Create(filepath2);
         Console.WriteLine($"Datei wurde erfolgreich erstellt: {filepath2}");
         await vadd();
         return filepath2;
-        
     }
 
 }
