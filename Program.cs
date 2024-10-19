@@ -7,12 +7,12 @@ using System.Security.Cryptography.X509Certificates;
 using Datamain;
 using System.Net;
 using writing;
-using reading;
+using Delete;
 
 namespace Program;
 
 public class Pmain {
-    Data d = new Data();
+    static Data d = new Data();
     static void Main(string[] args) {
         Console.Title = "Vokabel abfrage";
         start();
@@ -20,20 +20,23 @@ public class Pmain {
 
     public static void start() {
 
-        Console.WriteLine("Vokabel abfrage: \n Bitte eingeben welche Option gewählt werden soll: \n1 --> Abfrage starten\n2 --> neue Vokabeln hinzufügen\n3 --> Beenden");
+        Console.WriteLine("Vokabel abfrage: \n Bitte eingeben welche Option gewählt werden soll: \n1 --> Abfrage starten\n2 --> neue Vokabeln hinzufügen\n3 --> Vokabeln löschen\n4--> Programm beenden");
 
         int inputvi = Convert.ToInt32(Console.ReadLine()!);
 
         switch (inputvi) {
             case 1:
-                Readhandler rh = new Readhandler();
-                rh.mainread();
+                //TODO --> Random questions 
                 break;
             case 2:
                 Writehandler wh = new Writehandler();
                 wh.mainadd();
                 break;
             case 3:
+                Deletefiles delete = new Deletefiles();
+                delete.selectdelete();
+                break;
+            case 4:
                 Environment.Exit(0);
                 break;
             default:
@@ -41,5 +44,14 @@ public class Pmain {
                 break;
         }
     }
+
+    /** 
+    TOD:
+    - Seperate Reader for all classes? --> Yes / Done
+    - Delete overriting the .json file
+    - Add Random Questions --> seperate Reader for this class
+    - Fix bugs
+    
+    **/
 
 }

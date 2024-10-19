@@ -4,10 +4,8 @@ using System.Text.Json;
 
 namespace writing;
 
-public class Writehandler : Data {
-    
+public class Writehandler {
     Data d = new Data();
-
     Translate t = new Translate();  
     public async void mainadd() {
 
@@ -17,8 +15,8 @@ public class Writehandler : Data {
 
         switch(inputmen2) {
             case 1:
-                //TODO
-                break;            
+                selectFilewrite();
+                break;
             case 2:
                 await getFileName();
                 break;
@@ -33,11 +31,12 @@ public class Writehandler : Data {
         
         Console.Clear();
         Console.WriteLine("Bitte geben Sie ihren Dateinamen an: \n");
-        fileName = Console.ReadLine()!;
-        await CreateFile(fileName);
+        d.fileName = Console.ReadLine()!;
+        await CreateFile(d.fileName);
 
     }
     
+    //Adding new Vocobulary
     public async Task vadd()
     {
         List<Translate> inputvoc = new List<Translate>();
@@ -45,7 +44,6 @@ public class Writehandler : Data {
 
         while (true)
         {
-
             //Input first vocabulary
             Console.Write("Wort: ");
             string vocab1 = Console.ReadLine()!;
@@ -54,17 +52,16 @@ public class Writehandler : Data {
             Console.Write("Übersetzung: ");
             string vocab2 = Console.ReadLine()!;
             
+            inputvoc.Add(new  Translate{ toTranslate = vocab1, translatet = vocab2 });
             //check for ESC to return to the menu
             ConsoleKeyInfo keyinfo = Console.ReadKey(true);
             if(keyinfo.Key == ConsoleKey.Escape) {
-
                 if (inputvoc.Count > 0) {
                     await Writedata(inputvoc);
                 }
                 Pmain.start();
+                return;
             }
-
-            inputvoc.Add(new  Translate{ toTranslate = vocab1, translatet = vocab2 });
         }
     }
 
@@ -77,6 +74,7 @@ public class Writehandler : Data {
 
         Console.WriteLine("Alle Vokabeln hinzugefügt");
         inputvoc.Clear(); 
+        Pmain.start();
     }
 
 
@@ -95,5 +93,24 @@ public class Writehandler : Data {
         Console.WriteLine($"Datei wurde erfolgreich erstellt: {d.filepath2} {d.filepathtranslate}");
         await vadd();
         return d.filepath;
+    }
+
+    //To select the list, which can then be expanded with new words
+    public async void selectFilewrite() {
+        try {
+            string[] files = Directory.GetFiles(d.filepath);
+            Console.WriteLine("Ihre Dateien: \n");
+            for(int i = 0; i < files.Length; i++) {
+
+                Console.WriteLine($"{i} {files[i]}\n");
+            }
+            Console.WriteLine("Bitte den Gewünschte Datei der Liste eingeben: \n");
+            int inputfile = Convert.ToInt32(Console.ReadLine()!);
+            d.filepath2 = files[inputfile];
+            Console.WriteLine(d.filepath2);
+            await vadd();
+        } catch(Exception e) {
+            Console.WriteLine(e.Message);
+        }
     }
 }
