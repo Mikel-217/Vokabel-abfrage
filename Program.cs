@@ -14,7 +14,7 @@ namespace Program;
 public class Pmain {
     Data d = new Data();
     static void Main(string[] args) {
-
+        Console.Title = "Vokabel abfrage";
         start();
     }
 
@@ -26,7 +26,8 @@ public class Pmain {
 
         switch (inputvi) {
             case 1:
-                //TODO
+                Readhandler rh = new Readhandler();
+                rh.mainread();
                 break;
             case 2:
                 Writehandler wh = new Writehandler();

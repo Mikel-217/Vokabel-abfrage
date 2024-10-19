@@ -1,5 +1,6 @@
 using Program;
 using Datamain;
+using System.Text.Json;
 
 namespace writing;
 
@@ -7,7 +8,7 @@ public class Writehandler : Data {
     
     Data d = new Data();
 
-
+    Translate t = new Translate();  
     public async void mainadd() {
 
         Console.Clear();
@@ -37,40 +38,47 @@ public class Writehandler : Data {
 
     }
     
-    //ADD Vocabulary Task
-    public async Task vadd() {
+    public async Task vadd()
+    {
+        List<Translate> inputvoc = new List<Translate>();
+        Console.WriteLine("Bitte Vokabeln eingeben. ESC zum Beenden drücken.\n");
 
-        List<string> inputvoc = new List<string>();
-        Console.WriteLine("Bitte Vokabel eingeben und Enter drücken: \nESC zum beenden drücken \n");
-        
-        while (true) {
-            d.vocabluary = Console.ReadLine();
+        while (true)
+        {
+
+            //Input first vocabulary
+            Console.Write("Wort: ");
+            string vocab1 = Console.ReadLine()!;
+
+            //Input second vocabulary    
+            Console.Write("Übersetzung: ");
+            string vocab2 = Console.ReadLine()!;
+            
+            //check for ESC to return to the menu
             ConsoleKeyInfo keyinfo = Console.ReadKey(true);
-
             if(keyinfo.Key == ConsoleKey.Escape) {
-                if(inputvoc.Count > 0) {
+
+                if (inputvoc.Count > 0) {
                     await Writedata(inputvoc);
                 }
-                Thread.Sleep(100);
                 Pmain.start();
             }
-            inputvoc.Add(d.vocabluary!);
+
+            inputvoc.Add(new  Translate{ toTranslate = vocab1, translatet = vocab2 });
         }
     }
-    //Data Writing to a Txt File
-    public async Task Writedata(List<string> inputvoc) {
 
-        Console.WriteLine(d.filepath2);
-        using (StreamWriter stream = new StreamWriter(d.filepath2!, append: true)) {
+    // Writing in .json file
+    public async Task Writedata(List<Translate> inputvoc)
+    {
+        string jsonString = JsonSerializer.Serialize(inputvoc, new JsonSerializerOptions { WriteIndented = true });
 
-            foreach (string voc in inputvoc!) {
-                await stream.WriteLineAsync(voc);
-                Console.WriteLine($"Hinzugefügt: {voc}");
-            }
-        }
-        Console.WriteLine("Alle hinzugefügt");
-        inputvoc.Clear();
+        await File.WriteAllTextAsync(d.filepath2!, jsonString);
+
+        Console.WriteLine("Alle Vokabeln hinzugefügt");
+        inputvoc.Clear(); 
     }
+
 
     //To Create a File 
     public async Task<string> CreateFile(string fileName) {
@@ -79,14 +87,10 @@ public class Writehandler : Data {
         if(!Directory.Exists(d.filepath)) {
             Directory.CreateDirectory(d.filepath);
         }
-        d.filepath2 = d.filepath + fileName + ".txt";
+        d.filepath2 = d.filepath + fileName + ".json";
         using (FileStream fs = File.Create(d.filepath2)) {
         //Just close the file after creating it
         }
-        // d.filepathtranslate = "translatet_" + d.filepath2 ;
-        // using (FileStream fs = File.Create(d.filepathtranslate)) {
-        //For the translation --> added later
-        // }
 
         Console.WriteLine($"Datei wurde erfolgreich erstellt: {d.filepath2} {d.filepathtranslate}");
         await vadd();
