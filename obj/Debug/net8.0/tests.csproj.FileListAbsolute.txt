@@ -42,3 +42,6 @@ C:\tmp\tests\Vokabel-abfrage\obj\Debug\net8.0\refint\tests.dll
 C:\tmp\tests\Vokabel-abfrage\obj\Debug\net8.0\tests.pdb
 C:\tmp\tests\Vokabel-abfrage\obj\Debug\net8.0\tests.genruntimeconfig.cache
 C:\tmp\tests\Vokabel-abfrage\obj\Debug\net8.0\ref\tests.dll
+C:\tmp\tests\Vokabel-abfrage\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\tmp\tests\Vokabel-abfrage\obj\Debug\net8.0\tests.csproj.AssemblyReference.cache
+C:\tmp\tests\Vokabel-abfrage\obj\Debug\net8.0\tests.csproj.Up2Date

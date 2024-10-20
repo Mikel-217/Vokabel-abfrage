@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mUfPfVAy4Q0=",
+  "dgSpecHash": "K0JQJ3o0/Rg=",
   "success": true,
   "projectFilePath": "C:\\tmp\\tests\\Vokabel-abfrage\\tests.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Kunze\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,4 +1,5 @@
 namespace Datamain;
+using Newtonsoft.Json;
 public class Data { 
     public string? fileName { get; set; }
     public string? filepath2 { get; set; }
@@ -15,7 +16,6 @@ public class Translate {
 }
 
 public class RandomQuiz {
-
     //For the first vocabulary in the .json File
     public string? nextvocabfirst { get; set;}
     //For the second vocabulary in the .json File 

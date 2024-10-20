@@ -1,6 +1,7 @@
 using Program;
 using Datamain;
 using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace writing;
 
@@ -66,9 +67,9 @@ public class Writehandler {
     }
 
     // Writing in .json file
-    public async Task Writedata(List<Translate> inputvoc)
-    {
-        string jsonString = JsonSerializer.Serialize(inputvoc, new JsonSerializerOptions { WriteIndented = true });
+    public async Task Writedata(List<Translate> inputvoc) {
+
+        string jsonString = JsonConvert.SerializeObject(inputvoc);
 
         await File.WriteAllTextAsync(d.filepath2!, jsonString);
 

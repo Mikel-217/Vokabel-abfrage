@@ -1,5 +1,5 @@
 using Datamain;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace RQuiz;
 
@@ -42,11 +42,8 @@ public class Quiz {
             using (StreamReader sr = new StreamReader(fs)) {
                 string jsonData = await sr.ReadToEndAsync();
                 Console.WriteLine(jsonData);
-                var options = new JsonSerializerOptions {
-                    PropertyNameCaseInsensitive = true
-                };
 
-                List<Translate>? translations = JsonSerializer.Deserialize<List<Translate>>(jsonData, options);
+                List<Translate>? translations = JsonConvert.DeserializeObject<List<Translate>>(jsonData);
 
                 if (translations != null) {
                     foreach (var translate in translations) {
@@ -62,7 +59,6 @@ public class Quiz {
         } catch(Exception e) {
             Console.WriteLine(e.Message);
         }
-
     }
 
     public async Task selectFileQuiz() {
