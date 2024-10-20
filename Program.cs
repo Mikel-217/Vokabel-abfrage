@@ -8,6 +8,7 @@ using Datamain;
 using System.Net;
 using writing;
 using Delete;
+using RQuiz;
 
 namespace Program;
 
@@ -26,7 +27,8 @@ public class Pmain {
 
         switch (inputvi) {
             case 1:
-                //TODO --> Random questions 
+                Quiz quiz = new Quiz();
+                quiz.mainquiz();    
                 break;
             case 2:
                 Writehandler wh = new Writehandler();
@@ -48,10 +50,11 @@ public class Pmain {
     /** 
     TOD:
     - Seperate Reader for all classes? --> Yes / Done
-    - Delete overriting the .json file
-    - Add Random Questions --> seperate Reader for this class
-    - Fix bugs
-    
+    - Fix Overriting the .json file
+    - Add Random Questions --> Done
+    - Fix bugs:
+        - Program ends after new list input
+        - Json Serialliser doesnt work
     **/
 
 }

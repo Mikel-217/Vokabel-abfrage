@@ -13,3 +13,12 @@ public class Translate {
     public string? translatet { get; set; }
 
 }
+
+public class RandomQuiz {
+
+    //For the first vocabulary in the .json File
+    public string? nextvocabfirst { get; set;}
+    //For the second vocabulary in the .json File 
+    public string? nextvocabsecond { get; set; } 
+
+}
