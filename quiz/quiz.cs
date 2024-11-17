@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.Marshalling;
 using Datamain;
 using Newtonsoft.Json;
 
@@ -7,6 +10,7 @@ public class Quiz {
     Data d = new Data();
     RandomQuiz rq = new RandomQuiz();
     List<RandomQuiz> quizdata = new List<RandomQuiz>();
+
     Random r = new Random();
 
     public async void mainquiz() {
@@ -36,25 +40,23 @@ public class Quiz {
     }
 
     public async Task getData() {
+        string jsonData;
         try {
-
-            using (FileStream fs = new FileStream(d.filepath2!, FileMode.Open, FileAccess.Read))
-            using (StreamReader sr = new StreamReader(fs)) {
-                string jsonData = await sr.ReadToEndAsync();
-                Console.WriteLine(jsonData);
-
-                List<Translate>? translations = JsonConvert.DeserializeObject<List<Translate>>(jsonData);
-
-                if (translations != null) {
-                    foreach (var translate in translations) {
-                        quizdata.Add(new RandomQuiz {
-                            nextvocabfirst = translate.toTranslate,
-                            nextvocabsecond = translate.translatet
-                        });
-                    }
-                }
-                Console.WriteLine("Daten erfolgreich geladen");
+            Console.WriteLine(d.filepath2);
+            if(d.filepath2 == null) Console.WriteLine($"Datei leer {d.filepath2}");
+            using (StreamReader sr = new StreamReader(d.filepath2!)) {
+                jsonData = await sr.ReadToEndAsync();
             }
+            
+            List<Translate>? translations = JsonConvert.DeserializeObject<List<Translate>>(jsonData);
+
+            foreach (Translate translation in translations!) {
+                quizdata.Add( new RandomQuiz{
+                    nextvocabfirst = translation.toTranslate,
+                    nextvocabsecond = translation.translatet
+                });
+            }
+
             randomquestions();
         } catch(Exception e) {
             Console.WriteLine(e.Message);
